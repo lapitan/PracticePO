@@ -1,0 +1,12 @@
+swagger-api:
+  version: "1.0"
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+server:
+  port: 8091
+  servlet:
+    context-path: /po
