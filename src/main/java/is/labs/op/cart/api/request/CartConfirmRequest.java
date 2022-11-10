@@ -7,5 +7,8 @@ import java.util.Calendar;
 @Data
 public class CartConfirmRequest {
     String address;
-    Calendar deliveryTime;
+
+    Calendar notEarlierThan;
+
+    Calendar notLaterThan;
 }

@@ -2,6 +2,7 @@ package is.labs.op.cart.api.controller;
 
 import is.labs.op.cart.api.dto.FrontEndCartDto;
 import is.labs.op.cart.api.request.CartConfirmRequest;
+import is.labs.op.cart.api.request.CartCreateRequest;
 import is.labs.op.cart.api.request.CartUpdateRequest;
 import is.labs.op.cart.api.service.CartService;
 import is.labs.op.item.api.dto.FrontendItemDto;
@@ -21,8 +22,8 @@ public class CartController {
     }
 
     @PostMapping
-    public FrontEndCartDto createCart(){
-        return cartService.createCart();
+    public FrontEndCartDto createCart(CartCreateRequest cartCreateRequest){
+        return cartService.createCart(cartCreateRequest);
     }
 
     @PutMapping(value = "/{cartId}")

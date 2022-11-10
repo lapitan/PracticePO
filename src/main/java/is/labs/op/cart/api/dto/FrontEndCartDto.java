@@ -12,6 +12,7 @@ public class FrontEndCartDto {
     ArrayList<FullItemInCartDto> items;
     int id;
     String status;
+    int userOwnerId;
 
     @Nullable
     String address;
