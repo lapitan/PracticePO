@@ -58,11 +58,11 @@ public class CartAggregateState implements AggregateState<Integer,CartAggregate>
         return new CartCreateEvent(this.getVersion(), customer);
     }
 
-    public CartConfirmEvent confirmCartCommand(String address){
+    public CartConfirmEvent confirmCartCommand(String address,Calendar notEarlierThan,Calendar notLaterThan){
         if (status.equals("Deleted")){
             throw new RuntimeException("Can't confirm cart, cart is already "+status);
         }
-        return new CartConfirmEvent(this.getVersion(),address);
+        return new CartConfirmEvent(this.getVersion(),address,notEarlierThan,notLaterThan);
     }
 
     public CartDeleteEvent deleteCartCommand(){
@@ -85,26 +85,30 @@ public class CartAggregateState implements AggregateState<Integer,CartAggregate>
         updatedAt=createdAt;
         this.customer=cartCreateEvent.getCustomer();
         status="Created";
+        version = (int)cartCreateEvent.getVersion();
     }
 
     @StateTransitionFunc
     public void cartConfirmApply(CartConfirmEvent cartConfirmEvent){
         this.status="Confirmed";
         updatedAt=cartConfirmEvent.getCreatedAt();
-        version++;
+        version = (int)cartConfirmEvent.getVersion();
         this.address=cartConfirmEvent.getAddress();
+        this.notEarlierThan=cartConfirmEvent.getNotEarlierThan();
+        this.notLaterThan=cartConfirmEvent.getNotLaterThan();
     }
 
     @StateTransitionFunc
     public void cartDeleteApply(CartDeleteEvent cartDeleteEvent){
         this.status="Deleted";
         updatedAt=cartDeleteEvent.getCreatedAt();
-        version++;
+        version = (int)cartDeleteEvent.getVersion();
     }
 
     @StateTransitionFunc
     public void cartUpdateApply(CartUpdateEvent cartUpdateEvent){
-        version++;
+        version = (int)cartUpdateEvent.getVersion();
+        updatedAt=cartUpdateEvent.getCreatedAt();
         items=cartUpdateEvent.getItems();
     }
 }
