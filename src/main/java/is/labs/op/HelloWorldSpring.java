@@ -11,7 +11,6 @@ public class HelloWorldSpring {
         ClassPathXmlApplicationContext context= new ClassPathXmlApplicationContext("applicationContext.xml");
 
         System.out.println(context.getBean("helloWorldBean",StringBean.class).getString());
-
     }
 
 }
