@@ -8,4 +8,11 @@
     <bean id="helloWorldBean" class="is.labs.op.StringBean">
         <constructor-arg value="HelloWorld!" />
     </bean>
+    
+    <bean id="subscriptionsManager" class="ru.quipy.streams.AggregateSubscriptionsManager">
+
+        <constructor-arg index="0" ref=""/>
+        <constructor-arg index="1" ref=""/>
+        <constructor-arg index="2" ref=""/>
+    </bean>
 </beans>

@@ -15,10 +15,11 @@ import ru.quipy.domain.AggregateState;
 
 import java.util.Calendar;
 import java.util.Set;
+import java.util.UUID;
 
-public class CartAggregateState implements AggregateState<Integer,CartAggregate> {
+public class CartAggregateState implements AggregateState<UUID,CartAggregate> {
 
-    private int cartId;
+    private UUID cartId;
 
     private Long createdAt = System.currentTimeMillis();
     private Long updatedAt = System.currentTimeMillis();
@@ -30,7 +31,7 @@ public class CartAggregateState implements AggregateState<Integer,CartAggregate>
     private Calendar notEarlierThan;
     private Calendar notLaterThan;
 
-    private Customer customer;
+    private UUID customerId;
 
     private Set<CartItem> items;
 
@@ -39,7 +40,7 @@ public class CartAggregateState implements AggregateState<Integer,CartAggregate>
 
     @Nullable
     @Override
-    public Integer getId() {
+    public UUID getId() {
         return cartId;
     }
 
@@ -51,11 +52,11 @@ public class CartAggregateState implements AggregateState<Integer,CartAggregate>
         this.version = version;
     }
 
-    public CartCreateEvent createCartCommand(Customer customer){
+    public CartCreateEvent createCartCommand(UUID customerId){
         if (!status.equals("null")){
             throw new RuntimeException("Can't create cart, cart is already "+status);
         }
-        return new CartCreateEvent(this.getVersion(), customer);
+        return new CartCreateEvent(this.getVersion(), customerId);
     }
 
     public CartConfirmEvent confirmCartCommand(String address,Calendar notEarlierThan,Calendar notLaterThan){
@@ -81,9 +82,9 @@ public class CartAggregateState implements AggregateState<Integer,CartAggregate>
 
     @StateTransitionFunc
     public void cartCreateApply(CartCreateEvent cartCreateEvent){
-        this.cartId=Integer.parseInt(cartCreateEvent.getId().toString());
+        this.cartId=UUID.randomUUID();
         updatedAt=createdAt;
-        this.customer=cartCreateEvent.getCustomer();
+        this.customerId=cartCreateEvent.getCustomerId();
         status="Created";
         version = (int)cartCreateEvent.getVersion();
     }
