@@ -2,11 +2,13 @@ package is.labs.op.cart.api.model;
 
 
 import is.labs.op.user.api.model.Customer;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Set;
 
+@Data
 @Entity
 public class Cart {
 

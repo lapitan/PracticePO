@@ -1,5 +1,6 @@
 package is.labs.op.cart.impl.service;
 
+import is.labs.op.cart.api.aggregate.CartAggregateState;
 import is.labs.op.cart.api.dto.FrontEndCartDto;
 import is.labs.op.cart.api.request.CartConfirmRequest;
 import is.labs.op.cart.api.request.CartCreateRequest;
@@ -12,6 +13,8 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public FrontEndCartDto createCart(CartCreateRequest cartCreateRequest) {
+        CartAggregateState cartAggregateState= new CartAggregateState();
+        cartAggregateState.createCartCommand(cartCreateRequest.getUserOwnerId());
         return null;
     }
 

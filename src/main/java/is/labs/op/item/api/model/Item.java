@@ -1,10 +1,12 @@
 package is.labs.op.item.api.model;
 
 import is.labs.op.cart.api.model.CartItem;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Set;
 
+@Data
 @Entity
 public class Item {
 
