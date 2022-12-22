@@ -1,3 +1,4 @@
+/*
 package is.labs.op.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,10 +29,12 @@ public class EventSourcingLibConfig {
         return new JsonEventMapper(jsonObjectMapper);
     }
 
-    /*@Bean
+    */
+/*@Bean
     EventStoreDbOperations eventStoreDbOperations(){
 
-    }*/
+    }*//*
+
 
     @Bean
     @ConfigurationProperties(prefix = "event.sourcing")
@@ -85,3 +88,4 @@ public class EventSourcingLibConfig {
 
 
 }
+*/
