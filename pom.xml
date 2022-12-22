@@ -112,6 +112,12 @@
     </dependency>
 
     <dependency>
+      <groupId>ru.quipy</groupId>
+      <artifactId>tiny-mongo-event-store-spring-boot-starter</artifactId>
+      <version>${library.version}</version>
+    </dependency>
+
+    <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
       <version>2.10</version>

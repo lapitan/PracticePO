@@ -22,19 +22,19 @@ public class CartEventDatabaseService {
     private final CartEventRepository cartEventRepository;
     private final AggregateSubscriptionsManager subscriptionsManager;
     private final CartEventDatabaseService instance;
-//    private final AggregateRegistry aggregateRegistry;
+    /*private final AggregateRegistry aggregateRegistry;*/
 
     public CartEventDatabaseService(CartEventRepository cartEventRepository, AggregateSubscriptionsManager subscriptionsManager/*, AggregateRegistry aggregateRegistry*/) {
 
         this.cartEventRepository = cartEventRepository;
         this.subscriptionsManager = subscriptionsManager;
-//        this.aggregateRegistry = aggregateRegistry;
+        /*this.aggregateRegistry = aggregateRegistry;*/
         instance=this;
     }
 
     @PostConstruct
     private void subscribe() {
-//        aggregateRegistry.register(CartAggregate.class,);
+
         subscriptionsManager.subscribe(instance);
     }
 

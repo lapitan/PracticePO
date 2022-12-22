@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.lang.reflect.Array;
 import java.util.*;
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class HelloWorldSpring {
@@ -27,7 +28,7 @@ public class HelloWorldSpring {
 
         System.out.println(0x02);*/
 
-        try {
+        /*try {
             Robot robot = new Robot();
             Thread.sleep(1000);
             robot.keyPress(KeyEvent.VK_W);
@@ -36,7 +37,15 @@ public class HelloWorldSpring {
 
         } catch (AWTException | InterruptedException e) {
             throw new RuntimeException(e);
+        }*/
+
+        List<String> numbers = new ArrayList(Arrays.asList("first", "second", "third"));
+        for (String number : numbers) {
+            if ("third".equals(number)) {
+                numbers.add("fourth");
+            }
         }
+        System.out.println(numbers.size());
 
     }
 
