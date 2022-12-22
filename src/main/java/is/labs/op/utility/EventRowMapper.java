@@ -1,3 +1,4 @@
+/*
 package is.labs.op.utility;
 
 import org.springframework.jdbc.core.RowMapper;
@@ -28,3 +29,4 @@ public class EventRowMapper implements RowMapper<EventRecord> {
         return record;
     }
 }
+*/

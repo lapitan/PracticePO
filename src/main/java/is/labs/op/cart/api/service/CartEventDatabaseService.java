@@ -36,6 +36,7 @@ public class CartEventDatabaseService {
     private void subscribe() {
 
         subscriptionsManager.subscribe(instance);
+        System.out.println("xm");
     }
 
     @SubscribeEvent
