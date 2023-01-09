@@ -76,10 +76,12 @@ public class EventToDb implements EventStore {
 
     @Override
     public boolean tableExists(@NotNull String aggregateTableName) {
-        String query = "SELECT count(*)" +
-                "FROM public" +
-                "WHERE table_name=" + aggregateTableName;
-        return jdbcTemplate.queryForObject(query, Integer.class) > 0;
+        String query="SELECT EXISTS (" +
+                "   SELECT FROM pg_tables" +
+                "   WHERE  schemaname = 'public'" +
+                "   AND    tablename  = '"+aggregateTableName+"'" +
+                "   )";
+        return jdbcTemplate.queryForObject(query, Boolean.class);
     }
 
     @Override
@@ -97,10 +99,10 @@ public class EventToDb implements EventStore {
     @NotNull
     @Override
     public List<EventRecord> findBatchOfEventRecordAfter(@NotNull String aggregateTableName, long eventSequenceNum, int batchSize) {
-        String query = "SELECT *" +
-                "FROM ?" +
-                "WHERE createdAt > ?"+
-                "ORDER BY createdAt"+
+        String query = "SELECT * " +
+                "FROM ? " +
+                "WHERE createdAt > ? "+
+                "ORDER BY createdAt "+
                 "LIMIT ?";
         return jdbcTemplate.query(query, new EventRowMapper(),aggregateTableName,eventSequenceNum,batchSize);
     }
@@ -108,9 +110,9 @@ public class EventToDb implements EventStore {
     @NotNull
     @Override
     public List<EventRecord> findEventRecordsWithAggregateVersionGraterThan(@NotNull String aggregateTableName, @NotNull Object aggregateId, long aggregateVersion) {
-        String query="SELECT *"+
-                "FROM ?"+
-                "WHERE aggregateId = ?"+
+        String query="SELECT * "+
+                "FROM ? "+
+                "WHERE aggregateId = ? "+
                 "AND aggregateVersion > ?";
         return jdbcTemplate.query(query, new EventRowMapper(),aggregateTableName,aggregateId,aggregateVersion);
     }

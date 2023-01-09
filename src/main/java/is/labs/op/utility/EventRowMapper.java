@@ -17,10 +17,10 @@ public class EventRowMapper implements RowMapper<EventRecord> {
         Long createdAd = null;
 
         EventRecord record = new EventRecord(
-                rs.getString("ID"),
-                rs.getString("OBJECT_ID"),
+                rs.getString("id"),
+                rs.getString("object_id"),
                 aggregateVersion,
-                rs.getString("EVENT_TYPE"),
+                rs.getString("event_type"),
                 payload,
                 createdAd
         );

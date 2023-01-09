@@ -7,7 +7,7 @@ import is.labs.op.cart.api.events.CartUpdateEvent;
 import ru.quipy.core.annotations.AggregateType;
 import ru.quipy.domain.Aggregate;
 
-@AggregateType(aggregateEventsTableName = "CartAggregate")
+@AggregateType(aggregateEventsTableName = "cart_aggregate")
 public class CartAggregate implements Aggregate {
 
 }
