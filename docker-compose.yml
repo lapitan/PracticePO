@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  app:
+    image: maven:3.9-eclipse-temurin-19-alpine
+    working_dir: /app
+    command: mvn spring-boot:run
+    volumes:
+      - .:/app:z
+      - maven-repo:/root/.m2:z
+    depends_on:
+      - mongo
+    network_mode: host
+
+  prometheus:
+    image: bitnami/prometheus
+    network_mode: host
+
+  mongo:
+    image: mongo
+    network_mode: host
+
+  mongo-express:
+    image: mongo-express
+    environment:
+      ME_CONFIG_MONGODB_SERVER: localhost
+    depends_on:
+      - mongo
+    network_mode: host
+
+volumes:
+  maven-repo:
