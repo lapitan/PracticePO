@@ -2,27 +2,30 @@ package is.labs.op.item.api.model;
 
 import is.labs.op.cart.api.model.CartItem;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
+//import javax.persistence.*;
 import java.util.Set;
 
 @Data
-@Entity
+//@Entity
+@Document("Item")
 public class Item {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    @Column
+//    @Column
     String name;
 
-    @Column
+//    @Column
     float price;
 
-    @Column
+//    @Column
     int quantityAvailable;
 
-    @OneToMany(mappedBy = "item")
+//    @OneToMany(mappedBy = "item")
     Set<CartItem> carts;
 }

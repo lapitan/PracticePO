@@ -1,4 +1,4 @@
-package is.labs.op.cart.impl.service;
+package is.labs.op.cart.api.service.impl;
 
 import is.labs.op.cart.api.aggregate.CartAggregateState;
 import is.labs.op.cart.api.dto.FrontEndCartDto;

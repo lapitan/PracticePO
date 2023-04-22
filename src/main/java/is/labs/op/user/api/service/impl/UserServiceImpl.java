@@ -1,4 +1,4 @@
-package is.labs.op.user.impl.service;
+package is.labs.op.user.api.service.impl;
 
 import is.labs.op.user.api.dto.FrontendUserDto;
 import is.labs.op.user.api.request.UserRequest;

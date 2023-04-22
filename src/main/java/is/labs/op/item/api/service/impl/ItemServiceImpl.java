@@ -1,4 +1,4 @@
-package is.labs.op.item.impl.service;
+package is.labs.op.item.api.service.impl;
 
 import is.labs.op.item.api.dto.FrontendItemDto;
 import is.labs.op.item.api.request.ItemRequest;

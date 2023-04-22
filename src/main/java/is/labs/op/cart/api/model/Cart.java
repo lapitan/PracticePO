@@ -3,36 +3,39 @@ package is.labs.op.cart.api.model;
 
 import is.labs.op.user.api.model.Customer;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
+//import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Set;
 
 @Data
-@Entity
+//@Entity
+@Document("cart")
 public class Cart {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    @Column
+    //@Column
     String status;
 
-    @Column
+   // @Column
     String address;
 
-    @Column
+   // @Column
     Calendar notEarlierThan;
 
-    @Column
+   // @Column
     Calendar notLaterThan;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id", nullable = false)
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "customer_id", nullable = false)
     Customer customer;
 
-    @OneToMany(mappedBy = "cart")
+//    @OneToMany(mappedBy = "cart")
     Set<CartItem> items;
 
 }

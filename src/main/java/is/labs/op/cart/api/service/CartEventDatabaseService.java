@@ -19,14 +19,14 @@ import javax.annotation.PostConstruct;
 @AggregateSubscriber(aggregateClass = CartAggregate.class, subscriberName = "cart-event-to-database")
 public class CartEventDatabaseService {
 
-    private final CartEventRepository cartEventRepository;
+    //private final CartEventRepository cartEventRepository;
     private final AggregateSubscriptionsManager subscriptionsManager;
     private final CartEventDatabaseService instance;
 //    private final AggregateRegistry aggregateRegistry;
 
-    public CartEventDatabaseService(CartEventRepository cartEventRepository, AggregateSubscriptionsManager subscriptionsManager/*, AggregateRegistry aggregateRegistry*/) {
+    public CartEventDatabaseService(AggregateSubscriptionsManager subscriptionsManager) {
 
-        this.cartEventRepository = cartEventRepository;
+//        this.cartEventRepository = cartEventRepository;
         this.subscriptionsManager = subscriptionsManager;
 //        this.aggregateRegistry = aggregateRegistry;
         instance=this;
@@ -47,7 +47,7 @@ public class CartEventDatabaseService {
         cartEventEntity.setId(cartEvent.getId());
         cartEventEntity.setData(cartEvent.toJson().toString());
 
-        cartEventRepository.save(cartEventEntity);
+//        cartEventRepository.save(cartEventEntity);
     }
 
     @SubscribeEvent
@@ -59,7 +59,7 @@ public class CartEventDatabaseService {
         cartEventEntity.setId(cartEvent.getId());
         cartEventEntity.setData(cartEvent.toJson().toString());
 
-        cartEventRepository.save(cartEventEntity);
+//        cartEventRepository.save(cartEventEntity);
 
     }
 
@@ -71,7 +71,7 @@ public class CartEventDatabaseService {
         cartEventEntity.setId(cartEvent.getId());
         cartEventEntity.setData(cartEvent.toJson().toString());
 
-        cartEventRepository.save(cartEventEntity);
+//        cartEventRepository.save(cartEventEntity);
     }
 
     @SubscribeEvent
@@ -82,7 +82,7 @@ public class CartEventDatabaseService {
         cartEventEntity.setId(cartEvent.getId());
         cartEventEntity.setData(cartEvent.toJson().toString());
 
-        cartEventRepository.save(cartEventEntity);
+//        cartEventRepository.save(cartEventEntity);
     }
 
 }

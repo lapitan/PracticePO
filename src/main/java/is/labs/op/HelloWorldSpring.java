@@ -18,25 +18,15 @@ public class HelloWorldSpring {
     }
 
     public static void main(String[] args) {
-        /*ClassPathXmlApplicationContext context= new ClassPathXmlApplicationContext("applicationContext.xml");
+        ClassPathXmlApplicationContext context= new ClassPathXmlApplicationContext("applicationContext.xml");
 
-        System.out.println(context.getBean("helloWorldBean",StringBean.class).getString());*/
+        System.out.println(context.getBean("helloWorldBean",StringBean.class).getString());
 
-        /*int a=5;
+        int a=5;
         int b =100;
 
-        System.out.println(0x02);*/
+        System.out.println(0x02);
 
-        try {
-            Robot robot = new Robot();
-            Thread.sleep(1000);
-            robot.keyPress(KeyEvent.VK_W);
-            Thread.sleep(500);
-            robot.keyRelease(KeyEvent.VK_W);
-
-        } catch (AWTException | InterruptedException e) {
-            throw new RuntimeException(e);
-        }
 
     }
 
