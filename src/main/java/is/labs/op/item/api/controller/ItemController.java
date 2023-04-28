@@ -1,44 +1,48 @@
 package is.labs.op.item.api.controller;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import is.labs.op.item.api.aggregate.ItemAggregateState;
 import is.labs.op.item.api.dto.FrontendItemDto;
+import is.labs.op.item.api.events.ItemCreateEvent;
+import is.labs.op.item.api.events.ItemDeleteEvent;
+import is.labs.op.item.api.events.ItemUpdateEvent;
+import is.labs.op.item.api.request.ItemCreateRequest;
 import is.labs.op.item.api.request.ItemRequest;
-import is.labs.op.item.api.response.ItemsResponse;
-import is.labs.op.item.api.service.ItemService;
-import org.springframework.http.MediaType;
+import is.labs.op.item.api.service.impl.ItemServiceImplKotlin;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "api/items")
 public class ItemController {
 
-    private final ItemService itemService;
+    private final ItemServiceImplKotlin itemService;
 
-    public ItemController(ItemService itemService) {
+    public ItemController(ItemServiceImplKotlin itemService) {
         this.itemService = itemService;
     }
 
     @PostMapping
-    public FrontendItemDto addItem(@RequestBody ItemRequest itemRequest){
+    public ItemCreateEvent addItem(@RequestBody ItemCreateRequest itemRequest){
         return itemService.addItem(itemRequest);
     }
 
-    @PutMapping(value = "/{itemId}")
-    public FrontendItemDto updateItem(@RequestBody ItemRequest itemRequest, @PathVariable int itemId){
-        return itemService.updateItem(itemRequest,itemId);
+    @PutMapping
+    public ItemUpdateEvent updateItem(@RequestBody ItemRequest itemRequest, String itemId){
+        return itemService.updateItem(itemRequest,UUID.fromString(itemId));
     }
 
     @GetMapping
-    public ItemsResponse getAllItems(){
-        return itemService.getAllItems();
+    public FrontendItemDto getItem(String itemId){
+        ItemAggregateState itemAggregateState=Objects.requireNonNull(itemService.getItem(UUID.fromString(itemId)));
+        if (itemAggregateState.getStatus().equals("Deleted")) throw new RuntimeException("Item is deleted. Can't get Item");
+        return new FrontendItemDto(itemAggregateState);
     }
 
-    @DeleteMapping(value = "/{itemId}")
-    public FrontendItemDto deleteItem(@PathVariable int itemId){
-        return itemService.deleteItem(itemId);
+    @DeleteMapping
+    public ItemDeleteEvent deleteItem(String itemId){
+        return itemService.deleteItem(UUID.fromString(itemId));
     }
 
 }

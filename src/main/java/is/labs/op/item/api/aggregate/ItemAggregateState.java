@@ -11,10 +11,11 @@ import ru.quipy.domain.AggregateState;
 
 import java.util.Calendar;
 import java.util.Set;
+import java.util.UUID;
 
-public class ItemAggregateState implements AggregateState<Integer, ItemAggregate> {
+public class ItemAggregateState implements AggregateState<UUID, ItemAggregate> {
 
-    int itemId;
+    UUID itemId;
 
     String name;
 
@@ -30,7 +31,7 @@ public class ItemAggregateState implements AggregateState<Integer, ItemAggregate
 
     @Nullable
     @Override
-    public Integer getId() {
+    public UUID getId() {
         return itemId;
     }
 
@@ -49,19 +50,19 @@ public class ItemAggregateState implements AggregateState<Integer, ItemAggregate
         if (status.equals("Deleted")){
             throw new RuntimeException("Can't delete item, item is already "+status);
         }
-        return new ItemDeleteEvent(this.getVersion());
+        return new ItemDeleteEvent(this.getVersion(),itemId);
     }
 
-    public ItemUpdateEvent updateItemCommand(float price, int quantityAvailable){
+    public ItemUpdateEvent updateItemCommand(float price, int quantityAvailable, UUID itemId){
         if (status.equals("Deleted")){
             throw new RuntimeException("Can't update item, item is already "+status);
         }
-        return new ItemUpdateEvent(this.getVersion(), price, quantityAvailable);
+        return new ItemUpdateEvent(this.getVersion(), price, quantityAvailable, itemId);
     }
 
     @StateTransitionFunc
     public void itemCreateApply(ItemCreateEvent itemCreateEvent){
-        this.itemId=Integer.parseInt(itemCreateEvent.getId().toString());
+        this.itemId=itemCreateEvent.getId();
         updatedAt=createdAt;
         this.name=itemCreateEvent.getItemName();
         this.price=itemCreateEvent.getPrice();
@@ -75,6 +76,7 @@ public class ItemAggregateState implements AggregateState<Integer, ItemAggregate
         this.status="Deleted";
         updatedAt=itemDeleteEvent.getCreatedAt();
         version=(int) itemDeleteEvent.getVersion();
+        quantityAvailable=0;
     }
 
     @StateTransitionFunc
@@ -86,4 +88,27 @@ public class ItemAggregateState implements AggregateState<Integer, ItemAggregate
 
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public int getQuantityAvailable() {
+        return quantityAvailable;
+    }
+
+    public Long getCreatedAt() {
+        return createdAt;
+    }
+
+    public Long getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public String getStatus() {
+        return status;
+    }
 }

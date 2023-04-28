@@ -19,6 +19,7 @@ public class CartCreateEvent extends Event<CartAggregate> implements Jsonable {
     UUID cartId;
     public CartCreateEvent(int version, UUID customerId) {
     super(UUID.randomUUID(), "CART_CREATE_EVENT", version, System.currentTimeMillis());
+    this.cartId=UUID.randomUUID();
     this.customerId=customerId;
     }
 

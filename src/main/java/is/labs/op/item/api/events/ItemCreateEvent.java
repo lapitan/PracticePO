@@ -9,14 +9,16 @@ import java.util.UUID;
 @DomainEvent(name = "ITEM_CREATE_EVENT")
 public class ItemCreateEvent extends Event<ItemAggregate> {
 
+    UUID itemId;
     String itemName;
     float price;
     int quantityAvailable;
     public ItemCreateEvent(int version, String itemName, float price, int quantityAvailable) {
-        super(UUID.randomUUID(), "CART_CREATE_EVENT", version, System.currentTimeMillis());
+        super(UUID.randomUUID(), "ITEM_CREATE_EVENT", version, System.currentTimeMillis());
         this.itemName=itemName;
         this.price=price;
         this.quantityAvailable=quantityAvailable;
+        this.itemId=UUID.randomUUID();
     }
 
     public String getItemName() {

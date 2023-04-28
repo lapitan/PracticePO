@@ -6,13 +6,14 @@ import org.springframework.lang.Nullable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 
 @Data
 public class FrontEndCartDto {
     ArrayList<FullItemInCartDto> items;
-    int id;
+    UUID id;
     String status;
-    int userOwnerId;
+    UUID userOwnerId;
 
     @Nullable
     String address;
@@ -22,4 +23,19 @@ public class FrontEndCartDto {
 
     @Nullable
     Calendar notLaterThan;
+
+    @Nullable
+    public String getAddress() {
+        return address;
+    }
+
+    @Nullable
+    public Calendar getNotEarlierThan() {
+        return notEarlierThan;
+    }
+
+    @Nullable
+    public Calendar getNotLaterThan() {
+        return notLaterThan;
+    }
 }

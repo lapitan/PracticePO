@@ -8,4 +8,8 @@ import java.util.ArrayList;
 @Data
 public class CartUpdateRequest {
     ArrayList<ItemInCartDto> items;
+
+    public ArrayList<ItemInCartDto> getItems() {
+        return items;
+    }
 }

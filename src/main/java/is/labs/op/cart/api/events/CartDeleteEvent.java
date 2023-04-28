@@ -13,8 +13,9 @@ import java.util.UUID;
 public class CartDeleteEvent extends Event<CartAggregate> implements Jsonable {
 
     UUID cartId;
-    public CartDeleteEvent(int version) {
+    public CartDeleteEvent(int version, UUID cartId) {
         super(UUID.randomUUID(), "CART_DELETE_EVENT", version, System.currentTimeMillis());
+        this.cartId=cartId;
     }
 
     @Override

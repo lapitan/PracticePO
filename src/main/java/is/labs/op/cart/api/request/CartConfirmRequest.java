@@ -8,7 +8,7 @@ import java.util.Calendar;
 public class CartConfirmRequest {
     String address;
 
-    Calendar notEarlierThan;
+    String notEarlierThan;
 
-    Calendar notLaterThan;
+    String notLaterThan;
 }

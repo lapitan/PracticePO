@@ -10,7 +10,10 @@ import java.util.UUID;
 @DomainEvent(name = "ITEM_DELETE_EVENT")
 public class ItemDeleteEvent extends Event<ItemAggregate> {
 
-    public ItemDeleteEvent(long version) {
-        super(UUID.randomUUID(), "CART_CREATE_EVENT", version, System.currentTimeMillis());
+    UUID itemId;
+
+    public ItemDeleteEvent(long version, UUID itemId) {
+        super(UUID.randomUUID(), "ITEM_DELETE_EVENT", version, System.currentTimeMillis());
+        this.itemId=itemId;
     }
 }
